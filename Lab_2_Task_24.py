@@ -1,8 +1,9 @@
-import pickle
-import os
+import input_time_table
+import saveFile
+from extractfile import extractfile
+from printlist import print_list
 
 
-# region 0) Функция печати меню программы:
 def menu():
     print(' Меню '.center(46, '='))
     print('| 0) Вывод меню                                        |')
@@ -14,46 +15,6 @@ def menu():
     print('| 6) Удаление одного элемента из списка                |')
     print('| e) Выход из программы                                |')
     print('=' * 46)
-
-
-# endregion
-
-# region 1) Добавление элемента в список:
-def input_list(bookindex):
-    dict_book = {}
-    print('Книга %d: ' % (bookindex + 1))
-    dict_book['author'] = input('Автор книги: ')
-    dict_book['price'] = float(input('Цена: '))
-    dict_book['count'] = int(input('Количество: '))
-    return dict_book
-
-
-# endregion
-
-# region 2) Печать списка книг:
-def print_list(list_books):
-    for el in list_books:
-        print('автор: %-5s, цена: %5.2f количество: %4d ' % (el['author'], el['price'], el['count']))
-    print()
-
-
-# endregion
-
-def saveFile(data):
-    with open(input('Сохранить как: ').strip() + '.pcl', 'wb') as file:
-        pickle.dump(data, file)
-
-
-def extractfile(filename):
-    while True:
-        if os.path.exists(filename):
-            with open(filename, 'rb') as file:
-                return pickle.load(file)
-        else:
-            print('Файл с таким названием отсутствует')
-            return
-
-
 # region ------------------ Основная программа ----------------
 LB = []  # - список книг
 menu()
@@ -65,7 +26,7 @@ while tf:
         menu()
     elif p == '1':
         # Добавление элемента в список:
-        LB.append(input_list(len(LB)))
+        LB.append(input_time_table.input_time(len(LB)))
     elif p == '2':
         # Печать:
         print_list(LB)
@@ -73,7 +34,7 @@ while tf:
         # Сортировка по автору:
         LB.sort(key=(lambda x: x['author']))
     elif p == '4':
-        saveFile(LB)
+        saveFile.save_file(LB)
     elif p == '5':
         filename = input('Введите название файла: ').strip() + '.pcl'
         LB = extractfile(filename)

@@ -36,7 +36,7 @@ while tf:
     elif p == '4':
         saveFile.save_file(LB)
     elif p == '5':
-        filename = input('Введите название файла: ').strip() + '.pcl'
+        filename = input('Введите название файла: ').strip() + '.pkl'
         LB = extractfile(filename)
     elif p == '6':
         try:

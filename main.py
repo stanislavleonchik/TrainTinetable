@@ -18,8 +18,7 @@ def menu():
 # region ------------------ Основная программа ----------------
 LB = []  # - список книг
 menu()
-tf = True
-while tf:
+while True:
     p = input('Введите номер пункта ')
     if p == '0':
         # Меню:
@@ -46,7 +45,7 @@ while tf:
         except ValueError:
             print('Некорректный номер записи')
     elif p in 'eEеЕ':
-        tf = False
+        break
     else:
         print('Нет такого пункта меню!')
         menu()
